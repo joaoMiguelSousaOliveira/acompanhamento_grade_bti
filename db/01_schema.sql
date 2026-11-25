@@ -30,3 +30,40 @@ CREATE TABLE componente (
     modalidade    VARCHAR(10) NOT NULL CHECK (modalidade IN ('PRESENCIAL','EAD')),
     ativo         BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+CREATE TABLE compoe(
+    id_enfase       INT    REFERENCES enfase(id_enfase),
+    id_componente   BIGINT REFERENCES componente(id_componente),
+    tipo            VARCHAR(11) NOT NULL CHECK (tipo IN ('OBRIGATORIO','OPTATIVO')),
+    PRIMARY KEY (id_enfase, id_componente)
+);
+
+CREATE TABLE concluiu(
+    matricula           CHAR(11) REFERENCES aluno(matricula) ,
+    id_componente       BIGINT REFERENCES componente(id_componente),
+    semestre_conclusao  CHAR(6) NOT NULL CHECK (semestre_conclusao ~ '^[0-9]{4}\.[12]$'),
+    PRIMARY KEY (matricula, id_componente)
+);
+
+CREATE TABLE acompanha(
+    matricula       CHAR(11) REFERENCES aluno(matricula) ,
+    id_enfase       INT     REFERENCES enfase(id_enfase),
+    data_inicio     DATE    NOT NULL DEFAULT CURRENT_DATE,
+    PRIMARY KEY (matricula, id_enfase)
+);
+
+CREATE TABLE pre_requisito(
+    id_componente       BIGINT REFERENCES componente(id_componente),
+    id_exigido          BIGINT  REFERENCES componente(id_componente),
+    grupo_alternativa   INT NOT NULL CHECK (grupo_alternativa > 0) ,
+    PRIMARY KEY (id_componente, id_exigido, grupo_alternativa),
+    CHECK (id_componente <> id_exigido)
+);
+
+CREATE TABLE equivalencia(
+   id_componente       BIGINT REFERENCES componente(id_componente),
+    id_equivalente     BIGINT  REFERENCES componente(id_componente),
+    grupo_alternativa   INT NOT NULL CHECK (grupo_alternativa > 0) ,
+    PRIMARY KEY (id_componente, id_equivalente, grupo_alternativa),
+    CHECK (id_componente <> id_equivalente)
+);
