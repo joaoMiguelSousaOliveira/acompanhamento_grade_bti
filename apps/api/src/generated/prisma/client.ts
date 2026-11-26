@@ -31,8 +31,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more EstruturaCurriculars
+ * const estruturaCurriculars = await prisma.estruturaCurricular.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,4 +41,58 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
-
+/**
+ * Model EstruturaCurricular
+ * 
+ */
+export type EstruturaCurricular = Prisma.EstruturaCurricularModel
+/**
+ * Model Aluno
+ * 
+ */
+export type Aluno = Prisma.AlunoModel
+/**
+ * Model Credencial
+ * 
+ */
+export type Credencial = Prisma.CredencialModel
+/**
+ * Model SessaoRefresh
+ * 
+ */
+export type SessaoRefresh = Prisma.SessaoRefreshModel
+/**
+ * Model Enfase
+ * 
+ */
+export type Enfase = Prisma.EnfaseModel
+/**
+ * Model Componente
+ * 
+ */
+export type Componente = Prisma.ComponenteModel
+/**
+ * Model Compoe
+ * 
+ */
+export type Compoe = Prisma.CompoeModel
+/**
+ * Model Concluiu
+ * 
+ */
+export type Concluiu = Prisma.ConcluiuModel
+/**
+ * Model Acompanha
+ * 
+ */
+export type Acompanha = Prisma.AcompanhaModel
+/**
+ * Model PreRequisito
+ * 
+ */
+export type PreRequisito = Prisma.PreRequisitoModel
+/**
+ * Model Equivalencia
+ * 
+ */
+export type Equivalencia = Prisma.EquivalenciaModel

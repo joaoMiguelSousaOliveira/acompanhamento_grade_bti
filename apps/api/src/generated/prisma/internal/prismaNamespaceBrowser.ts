@@ -51,7 +51,17 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  EstruturaCurricular: 'EstruturaCurricular',
+  Aluno: 'Aluno',
+  Credencial: 'Credencial',
+  SessaoRefresh: 'SessaoRefresh',
+  Enfase: 'Enfase',
+  Componente: 'Componente',
+  Compoe: 'Compoe',
+  Concluiu: 'Concluiu',
+  Acompanha: 'Acompanha',
+  PreRequisito: 'PreRequisito',
+  Equivalencia: 'Equivalencia'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +78,137 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const EstruturaCurricularScalarFieldEnum = {
+  idEstrutura: 'idEstrutura',
+  codigo: 'codigo',
+  nomeMatriz: 'nomeMatriz',
+  anoEntradaVigor: 'anoEntradaVigor',
+  semestreConclusaoIdeal: 'semestreConclusaoIdeal',
+  chTotalMinima: 'chTotalMinima',
+  chOptativasMinima: 'chOptativasMinima'
+} as const
+
+export type EstruturaCurricularScalarFieldEnum = (typeof EstruturaCurricularScalarFieldEnum)[keyof typeof EstruturaCurricularScalarFieldEnum]
+
+
+export const AlunoScalarFieldEnum = {
+  matricula: 'matricula',
+  nome: 'nome',
+  email: 'email',
+  idEstrutura: 'idEstrutura'
+} as const
+
+export type AlunoScalarFieldEnum = (typeof AlunoScalarFieldEnum)[keyof typeof AlunoScalarFieldEnum]
+
+
+export const CredencialScalarFieldEnum = {
+  matricula: 'matricula',
+  senhaHash: 'senhaHash',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type CredencialScalarFieldEnum = (typeof CredencialScalarFieldEnum)[keyof typeof CredencialScalarFieldEnum]
+
+
+export const SessaoRefreshScalarFieldEnum = {
+  id: 'id',
+  matricula: 'matricula',
+  tokenHash: 'tokenHash',
+  criadoEm: 'criadoEm',
+  expiraEm: 'expiraEm',
+  revogadoEm: 'revogadoEm'
+} as const
+
+export type SessaoRefreshScalarFieldEnum = (typeof SessaoRefreshScalarFieldEnum)[keyof typeof SessaoRefreshScalarFieldEnum]
+
+
+export const EnfaseScalarFieldEnum = {
+  idEnfase: 'idEnfase',
+  nome: 'nome'
+} as const
+
+export type EnfaseScalarFieldEnum = (typeof EnfaseScalarFieldEnum)[keyof typeof EnfaseScalarFieldEnum]
+
+
+export const ComponenteScalarFieldEnum = {
+  idComponente: 'idComponente',
+  codigo: 'codigo',
+  nome: 'nome',
+  chTotal: 'chTotal',
+  modalidade: 'modalidade',
+  ativo: 'ativo'
+} as const
+
+export type ComponenteScalarFieldEnum = (typeof ComponenteScalarFieldEnum)[keyof typeof ComponenteScalarFieldEnum]
+
+
+export const CompoeScalarFieldEnum = {
+  idEnfase: 'idEnfase',
+  idComponente: 'idComponente',
+  tipo: 'tipo'
+} as const
+
+export type CompoeScalarFieldEnum = (typeof CompoeScalarFieldEnum)[keyof typeof CompoeScalarFieldEnum]
+
+
+export const ConcluiuScalarFieldEnum = {
+  matricula: 'matricula',
+  idComponente: 'idComponente',
+  semestreConclusao: 'semestreConclusao'
+} as const
+
+export type ConcluiuScalarFieldEnum = (typeof ConcluiuScalarFieldEnum)[keyof typeof ConcluiuScalarFieldEnum]
+
+
+export const AcompanhaScalarFieldEnum = {
+  matricula: 'matricula',
+  idEnfase: 'idEnfase',
+  dataInicio: 'dataInicio'
+} as const
+
+export type AcompanhaScalarFieldEnum = (typeof AcompanhaScalarFieldEnum)[keyof typeof AcompanhaScalarFieldEnum]
+
+
+export const PreRequisitoScalarFieldEnum = {
+  idComponente: 'idComponente',
+  idExigido: 'idExigido',
+  grupoAlternativa: 'grupoAlternativa'
+} as const
+
+export type PreRequisitoScalarFieldEnum = (typeof PreRequisitoScalarFieldEnum)[keyof typeof PreRequisitoScalarFieldEnum]
+
+
+export const EquivalenciaScalarFieldEnum = {
+  idComponente: 'idComponente',
+  idEquivalente: 'idEquivalente',
+  grupoAlternativa: 'grupoAlternativa'
+} as const
+
+export type EquivalenciaScalarFieldEnum = (typeof EquivalenciaScalarFieldEnum)[keyof typeof EquivalenciaScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

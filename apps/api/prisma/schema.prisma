@@ -35,8 +35,34 @@ model Aluno {
   estrutura       EstruturaCurricular @relation(fields: [idEstrutura], references: [idEstrutura])
   concluidos      Concluiu[]
   acompanhamentos Acompanha[]
+  credencial      Credencial?
+  sessoes         SessaoRefresh[]
 
   @@map("aluno")
+}
+
+model Credencial {
+  matricula    String   @id @db.Char(11)
+  senhaHash    String   @map("senha_hash")
+  atualizadoEm DateTime @updatedAt @map("atualizado_em")
+
+  aluno Aluno @relation(fields: [matricula], references: [matricula], onDelete: Cascade)
+
+  @@map("credencial")
+}
+
+model SessaoRefresh {
+  id         String    @id @default(uuid()) @db.Uuid
+  matricula  String    @db.Char(11)
+  tokenHash  String    @unique @map("token_hash")
+  criadoEm   DateTime  @default(now()) @map("criado_em")
+  expiraEm   DateTime  @map("expira_em")
+  revogadoEm DateTime? @map("revogado_em")
+
+  aluno Aluno @relation(fields: [matricula], references: [matricula], onDelete: Cascade)
+
+  @@index([matricula])
+  @@map("sessao_refresh")
 }
 
 model Enfase {

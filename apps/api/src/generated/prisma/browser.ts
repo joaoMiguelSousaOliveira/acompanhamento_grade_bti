@@ -17,4 +17,58 @@ import * as Prisma from './internal/prismaNamespaceBrowser.js'
 export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
-
+/**
+ * Model EstruturaCurricular
+ * 
+ */
+export type EstruturaCurricular = Prisma.EstruturaCurricularModel
+/**
+ * Model Aluno
+ * 
+ */
+export type Aluno = Prisma.AlunoModel
+/**
+ * Model Credencial
+ * 
+ */
+export type Credencial = Prisma.CredencialModel
+/**
+ * Model SessaoRefresh
+ * 
+ */
+export type SessaoRefresh = Prisma.SessaoRefreshModel
+/**
+ * Model Enfase
+ * 
+ */
+export type Enfase = Prisma.EnfaseModel
+/**
+ * Model Componente
+ * 
+ */
+export type Componente = Prisma.ComponenteModel
+/**
+ * Model Compoe
+ * 
+ */
+export type Compoe = Prisma.CompoeModel
+/**
+ * Model Concluiu
+ * 
+ */
+export type Concluiu = Prisma.ConcluiuModel
+/**
+ * Model Acompanha
+ * 
+ */
+export type Acompanha = Prisma.AcompanhaModel
+/**
+ * Model PreRequisito
+ * 
+ */
+export type PreRequisito = Prisma.PreRequisitoModel
+/**
+ * Model Equivalencia
+ * 
+ */
+export type Equivalencia = Prisma.EquivalenciaModel
