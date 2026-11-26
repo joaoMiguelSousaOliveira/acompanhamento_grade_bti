@@ -67,3 +67,4 @@ CREATE TABLE equivalencia(
     PRIMARY KEY (id_componente, id_equivalente, grupo_alternativa),
     CHECK (id_componente <> id_equivalente)
 );
+
