@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model EstruturaCurricular {
+  idEstrutura            BigInt  @id @map("id_estrutura")
+  codigo                 String? @db.VarChar(10)
+  nomeMatriz             String  @map("nome_matriz")
+  anoEntradaVigor        Int?    @map("ano_entrada_vigor")
+  semestreConclusaoIdeal Int?    @map("semestre_conclusao_ideal")
+  chTotalMinima          Int     @map("ch_total_minima")
+  chOptativasMinima      Int     @map("ch_optativas_minima")
+
+  alunos Aluno[]
+
+  @@map("estrutura_curricular")
+}
+
+model Aluno {
+  matricula   String @id @db.Char(11)
+  nome        String @db.VarChar(120)
+  email       String @unique @db.VarChar(120)
+  idEstrutura BigInt @map("id_estrutura")
+
+  estrutura       EstruturaCurricular @relation(fields: [idEstrutura], references: [idEstrutura])
+  concluidos      Concluiu[]
+  acompanhamentos Acompanha[]
+
+  @@map("aluno")
+}
+
+model Enfase {
+  idEnfase Int    @id @default(autoincrement()) @map("id_enfase")
+  nome     String @unique @db.VarChar(120)
+
+  componentes     Compoe[]
+  acompanhamentos Acompanha[]
+
+  @@map("enfase")
+}
+
+model Componente {
+  idComponente BigInt  @id @map("id_componente")
+  codigo       String  @db.VarChar(10)
+  nome         String  @db.VarChar(120)
+  chTotal      Int     @map("ch_total")
+  modalidade   String  @db.VarChar(10)
+  ativo        Boolean @default(true)
+
+  enfases       Compoe[]
+  concluidos    Concluiu[]
+  preRequisitos PreRequisito[] @relation("ComponentePreRequisito")
+  exigidoPor    PreRequisito[] @relation("ComponenteExigido")
+  equivalencias Equivalencia[] @relation("ComponenteEquivalencia")
+  equivalenteDe Equivalencia[] @relation("ComponenteEquivalente")
+
+  @@map("componente")
+}
+
+model Compoe {
+  idEnfase     Int    @map("id_enfase")
+  idComponente BigInt @map("id_componente")
+  tipo         String @db.VarChar(11)
+
+  enfase     Enfase     @relation(fields: [idEnfase], references: [idEnfase])
+  componente Componente @relation(fields: [idComponente], references: [idComponente])
+
+  @@id([idEnfase, idComponente])
+  @@map("compoe")
+}
+
+model Concluiu {
+  matricula         String @db.Char(11)
+  idComponente      BigInt @map("id_componente")
+  semestreConclusao String @map("semestre_conclusao") @db.Char(6)
+
+  aluno      Aluno      @relation(fields: [matricula], references: [matricula])
+  componente Componente @relation(fields: [idComponente], references: [idComponente])
+
+  @@id([matricula, idComponente])
+  @@map("concluiu")
+}
+
+model Acompanha {
+  matricula  String   @db.Char(11)
+  idEnfase   Int      @map("id_enfase")
+  dataInicio DateTime @default(dbgenerated("CURRENT_DATE")) @map("data_inicio") @db.Date
+
+  aluno  Aluno  @relation(fields: [matricula], references: [matricula])
+  enfase Enfase @relation(fields: [idEnfase], references: [idEnfase])
+
+  @@id([matricula, idEnfase])
+  @@map("acompanha")
+}
+
+model PreRequisito {
+  idComponente     BigInt @map("id_componente")
+  idExigido        BigInt @map("id_exigido")
+  grupoAlternativa Int    @map("grupo_alternativa")
+
+  componente Componente @relation("ComponentePreRequisito", fields: [idComponente], references: [idComponente])
+  exigido    Componente @relation("ComponenteExigido", fields: [idExigido], references: [idComponente])
+
+  @@id([idComponente, idExigido, grupoAlternativa])
+  @@map("pre_requisito")
+}
+
+model Equivalencia {
+  idComponente     BigInt @map("id_componente")
+  idEquivalente    BigInt @map("id_equivalente")
+  grupoAlternativa Int    @map("grupo_alternativa")
+
+  componente  Componente @relation("ComponenteEquivalencia", fields: [idComponente], references: [idComponente])
+  equivalente Componente @relation("ComponenteEquivalente", fields: [idEquivalente], references: [idComponente])
+
+  @@id([idComponente, idEquivalente, grupoAlternativa])
+  @@map("equivalencia")
+}
